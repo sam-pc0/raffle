@@ -2,7 +2,7 @@ import React, { lazy, useEffect, useState } from 'react';
 import { Grid } from 'semantic-ui-react';
 
 import './App.scss';
-const WinnersList = lazy(() => import('../components/WinnersList'));
+const WinnersList = lazy(() => import('../components/Winners/WinnersList'));
 const Raffle = lazy(() => import('../components/Raffle/Raffle'));
 
 const App = () => {
