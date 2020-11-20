@@ -1,17 +1,28 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { Loader } from 'semantic-ui-react';
+
+import 'semantic-ui-css/semantic.min.css';
+import './index.scss';
+
+const App = lazy(() => import('./views/App'));
+const Snow = lazy(() => import('./components/Snow/Snow'));
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Suspense
+    fallback={
+      <Loader inverted active>
+        Loading...
+      </Loader>
+    }
+  >
+    <img
+      className="background-image"
+      src="/images/snowman.png"
+      alt="snowman"
+    ></img>
+    <Snow />
     <App />
-  </React.StrictMode>,
+  </Suspense>,
   document.getElementById('root')
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
