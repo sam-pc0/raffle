@@ -1,27 +1,32 @@
 import React, { lazy, useState, useEffect } from 'react';
 import { Card, Divider, Button, Image } from 'semantic-ui-react';
 
+import { RaffleService } from '../../helpers/services/raffle.service';
+
 import './Raffle.scss';
 const RaffleAnimation = lazy(() => import('./RaffleAnimation'));
 
 const Raffle = () => {
   const [shouldMoveAnimation, setShouldMoveAnimation] = useState(false);
-  const [isRaffleRunning, setIsRaffleRunning] = useState(false);
+  const [restantWinners, setRestantWinners] = useState(0);
   const [shouldShowButton, setShouldShowButton] = useState(false);
 
-  const handleStop = () => {
-    if (isRaffleRunning) {
+  const handleStop = async () => {
+    if (restantWinners > 0) {
+      setRestantWinners(restantWinners - 1);
+      const winner = await RaffleService.getAWinner();
+      await alert(`Felicidades ${winner.name} has ganado un ${winner.reward.name}`);
       setShouldMoveAnimation(false);
-      alert('Felicidades Bodoque');
-      setShouldShowButton(true); //por el momento
+      setShouldMoveAnimation(true);
     } else {
       setShouldShowButton(true);
+      setShouldMoveAnimation(false);
     }
   };
 
-  const handleStart = () => {
+  const handleStart = async () => {
+    setRestantWinners(await RaffleService.getTotalWinners());
     setShouldMoveAnimation(true);
-    setIsRaffleRunning(true);
     setShouldShowButton(false);
   };
 
@@ -37,7 +42,6 @@ const Raffle = () => {
         <div className="raffle__elements-container">
           {shouldShowButton && (
             <Button
-              disabled={isRaffleRunning}
               className="raffle__button"
               inverted
               onClick={handleStart}
