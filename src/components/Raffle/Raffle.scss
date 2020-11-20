@@ -1,0 +1,39 @@
+.raffle {
+  width: 100% !important;
+  height: 100%;
+  position: relative;
+  // background: url('./soy_tigo.png') repeat bottom right;
+
+  &__elements-container{
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  &__button {
+    background-color: hsl(215, 100%, 18%) !important;
+    margin: auto;
+    height: 4em;
+    width: 12em;
+    margin-bottom: 10em !important;
+    border-radius: 7px !important;
+  }
+
+  &__button:hover{
+    color: aliceblue !important;
+    background-color: hsl(215, 100%, 26%) !important;
+  }
+
+  &__image {
+    position: absolute;
+    display: block;
+    width: 13rem;
+    right: 0;
+    bottom: 1em;
+  }
+}
