@@ -1,50 +1,53 @@
 import { api } from '../../hooks/useAxios';
 
 export const RaffleService = {
-  winnerList: [
-    {
-      workId: '151515',
-      name: 'Juan Carlos Bodoque',
-      reward: {
-        name: 'Nvidia RTX 3090',
-        image: 'https://picsum.photos/seed/picsum/300/150',
+  winnerList: {
+    content: [
+      {
+        id: '5fb7f4e1905a025b653d36ce',
+        createDate: '2020-11-20T10:55:20.723-0600',
+        prize: {
+          id: '5fb7f50c905a025b653d36cf',
+          name: 'Tarjeta de video NVIDIA 3090 gg',
+          imgPath: 'https://picsum.photos/seed/picsum/200/300',
+        },
+        participant: {
+          id: '18934',
+          name: 'Ricardo Zepeda',
+          address: 'Casa',
+          phone: '50233124371',
+          area: 'Profiling',
+          email: 'rzepeda@tigo.com.gt',
+        },
       },
-    },
-    {
-      workId: '152425',
-      name: 'Tulio Tribiño',
-      reward: {
-        name: 'Viaje a las Bahamas',
-        image: 'https://picsum.photos/300/150',
+     {
+        id: '5fb7f4e1905a025b653d36ce',
+        createDate: '2020-11-20T10:55:20.723-0600',
+        prize: {
+          id: '5fb7f50c905a025b653d36cf',
+          name: 'Tarjeta de video NVIDIA 3090',
+          imgPath: 'https://picsum.photos/seed/picsum/200/300',
+        },
+        participant: {
+          id: '18934',
+          name: 'Ricardo Zepeda',
+          address: 'Casa',
+          phone: '50233124371',
+          area: 'Profiling',
+          email: 'rzepeda@tigo.com.gt',
+        },
       },
-    },
-  ],
 
-  async getTotalWinners() {
-    // return api.get('/raffle');
-    return 2;
+    ],
   },
 
-  async getAWinner() {
-    this.winnerList.push({
-      workId: '151515',
-      name: 'Juan Carlos Bodoque',
-      reward: {
-        name: 'Nvidia RTX 3090',
-        image: 'https://picsum.photos/seed/picsum/300/150',
-      },
-    });
-    return {
-      workId: '151515',
-      name: 'Juan Carlos Bodoque',
-      reward: {
-        name: 'Nvidia RTX 3090',
-        image: 'https://picsum.photos/seed/picsum/300/150',
-      },
-    };
+  async getCurrentRaffleWinners() {
+    // return api.get('/raffle').then((reponse) => response.content);
+    return this.winnerList.content;
   },
+
   async getWinnersList() {
-    // return api.get('/winners');
-    return this.winnerList;
+    // return api.get('/raffle').then((reponse) => response.content);
+    return this.winnerList.content;
   },
 };

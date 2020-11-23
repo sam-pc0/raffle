@@ -10,8 +10,16 @@ body {
   background-color: $bg-primary;
 }
 
-.background-image{
+.background-image {
   position: absolute;
   top: 1em;
   width: 45em;
+}
+
+.logo-image {
+  position: absolute;
+  bottom: 2em;
+  right: 3em;
+  width: 10em;
+
 }

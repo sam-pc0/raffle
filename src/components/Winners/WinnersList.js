@@ -19,8 +19,8 @@ const WinnersList = ({ data }) => {
         <Divider/> 
         {winnersList.length > 0 ? (
           <Card.Group>
-            {winnersList.map((winner) => (
-              <WinnerItem key={winner.workId} data={winner} />
+            {winnersList.map((winnerElement) => (
+              <WinnerItem key={winnerElement.participant.id} data={winnerElement} />
             ))}
           </Card.Group>
         ) : (

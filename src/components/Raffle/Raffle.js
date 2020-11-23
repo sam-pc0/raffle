@@ -1,23 +1,30 @@
-import React, { lazy, useState, useEffect } from 'react';
-import { Card, Divider, Button, Image } from 'semantic-ui-react';
+import React, { lazy, useState } from 'react';
+import { Card, Divider, Button } from 'semantic-ui-react';
 
 import { RaffleService } from '../../helpers/services/raffle.service';
 
 import './Raffle.scss';
+import WinnerModal from '../Winners/WinnerModal';
 const RaffleAnimation = lazy(() => import('./RaffleAnimation'));
 
 const Raffle = () => {
   const [shouldMoveAnimation, setShouldMoveAnimation] = useState(false);
-  const [restantWinners, setRestantWinners] = useState(0);
+  const [shouldShowModal, setShouldShowModal] = useState(false);
+  const [currentWinners, setCurrentWinners] = useState(false);
+  const [currentWinner, setCurrentWinner] = useState({});
+  const [winnerIndex, setWinnerIndex] = useState(0);
   const [shouldShowButton, setShouldShowButton] = useState(false);
 
   const handleStop = async () => {
-    if (restantWinners > 0) {
-      setRestantWinners(restantWinners - 1);
-      const winner = await RaffleService.getAWinner();
-      await alert(`Felicidades ${winner.name} has ganado un ${winner.reward.name}`);
-      setShouldMoveAnimation(false);
-      setShouldMoveAnimation(true);
+    if (currentWinners.length > winnerIndex) {
+      setCurrentWinner(currentWinners[winnerIndex]);
+      setShouldShowModal(true);
+      setTimeout(() => {
+        setShouldShowModal(false);
+        setWinnerIndex(winnerIndex + 1);
+        setShouldMoveAnimation(false);
+        setShouldMoveAnimation(true);
+      }, 3000);
     } else {
       setShouldShowButton(true);
       setShouldMoveAnimation(false);
@@ -25,13 +32,15 @@ const Raffle = () => {
   };
 
   const handleStart = async () => {
-    setRestantWinners(await RaffleService.getTotalWinners());
+    setCurrentWinners(await RaffleService.getCurrentRaffleWinners());
+    setWinnerIndex(0);
     setShouldMoveAnimation(true);
     setShouldShowButton(false);
   };
 
   return (
     <Card className="raffle">
+      <WinnerModal open={shouldShowModal} winnerElement={currentWinner} />
       <Card.Content>
         <Card.Header>Tómbola Regalona</Card.Header>
         <Divider />
@@ -41,11 +50,7 @@ const Raffle = () => {
         />
         <div className="raffle__elements-container">
           {shouldShowButton && (
-            <Button
-              className="raffle__button"
-              inverted
-              onClick={handleStart}
-            >
+            <Button className="raffle__button" inverted onClick={handleStart}>
               Comenzar Rifa
             </Button>
           )}

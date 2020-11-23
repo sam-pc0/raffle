@@ -21,6 +21,11 @@ ReactDOM.render(
       src="/images/snowman.png"
       alt="snowman"
     ></img>
+    <img
+      className="logo-image"
+      src="/images/profiling.png"
+      alt="Profiling Logo"
+    ></img>
     <Snow />
     <App />
   </Suspense>,
