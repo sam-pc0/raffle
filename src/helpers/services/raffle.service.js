@@ -29,10 +29,14 @@ export const RaffleService = {
   winnerList: {
     content: getData(8),
   },
+  currentWinners: {
+    content: getData(2),
+  },
+
 
   async getCurrentRaffleWinners() {
     // return api.get('/raffle').then((reponse) => response.content);
-    return this.winnerList.content;
+    return this.currentWinners.content;
   },
 
   async getWinnersList() {

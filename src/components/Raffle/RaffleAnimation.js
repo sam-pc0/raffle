@@ -25,6 +25,8 @@ const RaffleAnimation = ({ moveAnimation, onStop }) => {
     if (moveAnimation !== undefined) {
       if (moveAnimation) {
         startAnimation();
+      }else{
+        console.log('animation stop')
       }
     }
   }, [moveAnimation]);

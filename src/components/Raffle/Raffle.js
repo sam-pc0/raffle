@@ -19,10 +19,10 @@ const Raffle = ({ onWinnerAdd }) => {
     if (currentWinners.length > winnerIndex) {
       setCurrentWinner(currentWinners[winnerIndex]);
       setShouldShowModal(true);
+      setShouldMoveAnimation(false);
       setTimeout(() => {
         setShouldShowModal(false);
         setWinnerIndex(winnerIndex + 1);
-        setShouldMoveAnimation(false);
         setShouldMoveAnimation(true);
         onWinnerAdd(currentWinners[winnerIndex]);
       }, 3000);
