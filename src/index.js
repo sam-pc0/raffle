@@ -18,7 +18,7 @@ ReactDOM.render(
   >
     <img
       className="background-image"
-      src="/images/snowman.png"
+      src="/images/background.jpg"
       alt="snowman"
     ></img>
     <img
@@ -26,6 +26,17 @@ ReactDOM.render(
       src="/images/profiling.png"
       alt="Profiling Logo"
     ></img>
+    <img
+      className="three-image"
+      src="/images/three.png"
+      alt="Christmas Three"
+    ></img>
+    <img
+      className="fireplace-image"
+      src="/images/fireplace.png"
+      alt="Chimenea"
+    ></img>
+
     <Snow />
     <App />
   </Suspense>,

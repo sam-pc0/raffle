@@ -1,5 +1,9 @@
-.app{
+.app {
+  display: flex !important;
   height: 100vh;
+
+  &__grid{
+  }
 
   &__column {
     height: 90%;
