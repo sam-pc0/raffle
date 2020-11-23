@@ -7,7 +7,7 @@ import './Raffle.scss';
 import WinnerModal from '../Winners/WinnerModal';
 const RaffleAnimation = lazy(() => import('./RaffleAnimation'));
 
-const Raffle = () => {
+const Raffle = ({ onWinnerAdd }) => {
   const [shouldMoveAnimation, setShouldMoveAnimation] = useState(false);
   const [shouldShowModal, setShouldShowModal] = useState(false);
   const [currentWinners, setCurrentWinners] = useState(false);
@@ -24,6 +24,7 @@ const Raffle = () => {
         setWinnerIndex(winnerIndex + 1);
         setShouldMoveAnimation(false);
         setShouldMoveAnimation(true);
+        onWinnerAdd(currentWinners[winnerIndex]);
       }, 3000);
     } else {
       setShouldShowButton(true);

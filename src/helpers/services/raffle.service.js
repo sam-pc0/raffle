@@ -9,7 +9,7 @@ export const RaffleService = {
         prize: {
           id: '5fb7f50c905a025b653d36cf',
           name: 'Tarjeta de video NVIDIA 3090 gg',
-          imgPath: 'https://picsum.photos/seed/picsum/200/300',
+          imgPath: 'https://picsum.photos/200/300',
         },
         participant: {
           id: '18934',
@@ -26,7 +26,7 @@ export const RaffleService = {
         prize: {
           id: '5fb7f50c905a025b653d36cf',
           name: 'Tarjeta de video NVIDIA 3090',
-          imgPath: 'https://picsum.photos/seed/picsum/200/300',
+          imgPath: 'https://picsum.photos/200/300',
         },
         participant: {
           id: '18934',

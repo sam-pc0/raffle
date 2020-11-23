@@ -1,7 +1,7 @@
 import React from 'react';
 import Rodal from 'rodal';
 import 'rodal/lib/rodal.css';
-import { Grid, Header, Image } from 'semantic-ui-react';
+import { Header } from 'semantic-ui-react';
 
 import './WinnerModal.scss';
 
@@ -10,6 +10,7 @@ const WinnerModal = ({ open, winnerElement }) => {
     <>
       {winnerElement.participant && (
         <Rodal
+          onClose={() => null}
           duration={500}
           enterAnimation="rotate"
           leaveAnimation="slideLeft"

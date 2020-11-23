@@ -10,6 +10,10 @@ const Raffle = lazy(() => import('../components/Raffle/Raffle'));
 const App = () => {
   const [winnersListData, setWinnersListData] = useState([]);
 
+  const handleWinnerAdd = (winnerElement) => {
+    setWinnersListData((prevItems) => [...prevItems, winnerElement]);
+  };
+
   useEffect(() => {
     RaffleService.getWinnersList()
       .then(setWinnersListData)
@@ -29,7 +33,7 @@ const App = () => {
         <WinnersList data={winnersListData} />
       </Grid.Column>
       <Grid.Column className="app__column" width={10}>
-        <Raffle />
+        <Raffle onWinnerAdd={handleWinnerAdd} />
       </Grid.Column>
     </Grid>
   );
