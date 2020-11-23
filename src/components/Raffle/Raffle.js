@@ -57,9 +57,14 @@ const Raffle = ({ onWinnerAdd }) => {
           )}
         </div>
         <img
-          className="raffle__image"
+          className="raffle__tigo"
           src="/images/soy_tigo.png"
           alt="soy tigo"
+        ></img>
+        <img
+          className="raffle__logo"
+          src="/images/profiling.png"
+          alt="Profiling Logo"
         ></img>
       </Card.Content>
     </Card>

@@ -22,11 +22,6 @@ ReactDOM.render(
       alt="snowman"
     ></img>
     <img
-      className="logo-image"
-      src="/images/profiling.png"
-      alt="Profiling Logo"
-    ></img>
-    <img
       className="three-image"
       src="/images/three.png"
       alt="Christmas Three"

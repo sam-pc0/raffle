@@ -28,11 +28,20 @@
     background-color: hsl(215, 100%, 26%) !important;
   }
 
-  &__image {
+  &__tigo {
     position: absolute;
     display: block;
     width: 13rem;
     right: 0;
-    bottom: 1em;
+    bottom: 3em;
   }
+
+  &__logo {
+    position: absolute;
+    display: block;
+    width: 8rem;
+    right: 0;
+    bottom: 1.5em;
+  }
+
 }
