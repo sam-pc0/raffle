@@ -1,46 +1,35 @@
-import { api } from '../../hooks/useAxios';
+import IndexedDbService from "../services/indexed-db";
+import { enumCollections, Winner, Participant, Reward } from "../type";
 
-const getData = (number) => {
-  let content = [];
-
-  for (var i = 0, len = number; i < len; i++) {
-    content.push({
-      id: '5fb7f4e1905a025b653d36ce',
-      createDate: '2020-11-20T10:55:20.723-0600',
-      prize: {
-        id: '5fb7f50c905a025b653d36cf',
-        name: 'Tarjeta de video NVIDIA 3090',
-        imgPath: 'https://picsum.photos/200/300',
-      },
-      participant: {
-        id: '18934',
-        name: 'Ricardo Zepeda',
-        address: 'Casa',
-        phone: '50233124371',
-        area: 'Profiling',
-        email: 'rzepeda@tigo.com.gt',
-      },
-    });
-  }
-  console.log(content);
-  return content;
-};
 export const RaffleService = {
-  winnerList: {
-    content: getData(8),
-  },
-  currentWinners: {
-    content: getData(2),
+  async getWinners() {
+    let winners = await IndexedDbService.read(enumCollections.WINNERS);
+    return winners.map((winner) => new Winner(winner));
   },
 
-
-  async getCurrentRaffleWinners() {
-    // return api.get('/raffle').then((reponse) => response.content);
-    return this.currentWinners.content;
+  async updatetWinners(winners) {
+    return IndexedDbService.update(enumCollections.WINNERS, winners);
   },
 
-  async getWinnersList() {
-    // return api.get('/raffle').then((reponse) => response.content);
-    return this.winnerList.content;
+  async getParticipants() {
+    let participants = await IndexedDbService.read(
+      enumCollections.PARTICIPANTS
+    );
+    return participants.map((participant) => {
+      return new Participant(participant);
+    });
+  },
+
+  async updateParticipants(participants) {
+    return IndexedDbService.update(enumCollections.PARTICIPANTS, participants);
+  },
+
+  async getRewards() {
+    let rewards = IndexedDbService.read(enumCollections.REWARDS);
+    return rewards.map((reward) => new Reward(reward.name, reward.wasWon));
+  },
+
+  async updateRewards(rewards) {
+    return IndexedDbService.update(enumCollections.WINNERS, rewards);
   },
 };

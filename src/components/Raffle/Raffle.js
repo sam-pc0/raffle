@@ -1,13 +1,15 @@
-import React, { lazy, useState } from 'react';
-import { Card, Divider, Button } from 'semantic-ui-react';
+import React, { lazy, useState } from "react";
+import { Card, Divider, Button } from "semantic-ui-react";
+import { useHistory } from "react-router-dom";
 
-import { RaffleService } from '../../helpers/services/raffle.service';
+import { RaffleService } from "../../helpers/services/raffle.service";
 
-import './Raffle.scss';
-import WinnerModal from '../Winners/WinnerModal';
-const RaffleAnimation = lazy(() => import('./RaffleAnimation'));
+import "./Raffle.scss";
+import WinnerModal from "../Winners/WinnerModal";
+const RaffleAnimation = lazy(() => import("./RaffleAnimation"));
 
 const Raffle = ({ onWinnerAdd }) => {
+  const history = useHistory();
   const [shouldMoveAnimation, setShouldMoveAnimation] = useState(false);
   const [shouldShowModal, setShouldShowModal] = useState(false);
   const [currentWinners, setCurrentWinners] = useState(false);
@@ -43,7 +45,20 @@ const Raffle = ({ onWinnerAdd }) => {
     <Card className="raffle">
       <WinnerModal open={shouldShowModal} winnerElement={currentWinner} />
       <Card.Content>
-        <Card.Header>Tómbola Regalona</Card.Header>
+        <Card.Header>
+          <div className="raffle__header">
+            Tómbola Regalona
+            {shouldShowButton && (
+              <Button
+                className="raffle__button-small"
+                inverted
+                onClick={() => history.push("/participants")}
+              >
+                Participantes
+              </Button>
+            )}
+          </div>
+        </Card.Header>
         <Divider />
         <RaffleAnimation
           onStop={handleStop}
@@ -56,16 +71,9 @@ const Raffle = ({ onWinnerAdd }) => {
             </Button>
           )}
         </div>
-        <img
-          className="raffle__tigo"
-          src="/images/soy_tigo.png"
-          alt="soy tigo"
-        ></img>
-        <img
-          className="raffle__logo"
-          src="/images/profiling.png"
-          alt="Profiling Logo"
-        ></img>
+        <section className="raffle__logo">
+          <h2>Grupo Norte ⬆️ </h2>
+        </section>
       </Card.Content>
     </Card>
   );

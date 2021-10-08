@@ -1,7 +1,29 @@
-.raffle {
+.form {
+  margin-top: 2.5em;
+  width: 100%;
+  padding: 0 4em;
+}
+.participants {
   width: 100% !important;
   height: 100%;
   position: relative;
+
+  &__content {
+    width: 100%;
+    min-height: 38em;
+    max-height: 38em;
+    padding: 1em;
+    padding-top: 0;
+    margin-top: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: scroll;
+  }
+
+  &__grid {
+    max-height: 38em;
+  }
 
   &__header {
     display: flex;
@@ -25,14 +47,12 @@
     margin: auto;
     height: 4em;
     width: 12em;
-    margin-bottom: 10em !important;
     border-radius: 7px !important;
   }
 
   &__button-small {
     background-color: hsl(215, 100%, 18%) !important;
     margin: 0;
-    width: 12em;
     border-radius: 7px !important;
     z-index: 1;
   }
@@ -42,11 +62,14 @@
     color: aliceblue !important;
     background-color: hsl(215, 100%, 26%) !important;
   }
+  &__button:active {
+    color: aliceblue !important;
+  }
 
   &__logo {
     display: flex;
-    margin-top: 2em;
     width: 100%;
+    margin-top: 2em;
     justify-content: flex-end;
     align-items: center;
   }

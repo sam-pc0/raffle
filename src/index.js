@@ -1,12 +1,16 @@
 import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
-import { Loader } from 'semantic-ui-react';
 
+import IndexedDbService from "./helpers/services/indexed-db";
+
+import { Loader } from 'semantic-ui-react';
 import 'semantic-ui-css/semantic.min.css';
 import './index.scss';
 
 const App = lazy(() => import('./views/App'));
 const Snow = lazy(() => import('./components/Snow/Snow'));
+
+IndexedDbService.start();
 
 ReactDOM.render(
   <Suspense
