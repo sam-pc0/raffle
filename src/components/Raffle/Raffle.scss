@@ -20,6 +20,14 @@
     align-items: flex-end;
   }
 
+  &__text {
+    margin: auto;
+    height: 4em;
+    width: 12em;
+    margin-bottom: 4em !important;
+    text-align: center;
+  }
+
   &__button {
     background-color: hsl(215, 100%, 18%) !important;
     margin: auto;

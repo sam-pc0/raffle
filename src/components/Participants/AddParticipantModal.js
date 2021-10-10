@@ -13,7 +13,7 @@ const AddParticipantModal = ({ open, onClose, onAdd }) => {
 
   const handleAdd = () => {
     if (name !== "" && area !== "" && phone !== "") {
-      onAdd(new Participant({ name, area, phone }));
+      onAdd(new Participant({ name, area, phone, wasWon: false }));
       reset();
     }
   };

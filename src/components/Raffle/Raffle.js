@@ -3,43 +3,100 @@ import { Card, Divider, Button } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
 import { RaffleService } from "../../helpers/services/raffle.service";
+import * as type from "../../helpers/type";
+import _ from "lodash";
 
 import "./Raffle.scss";
 import WinnerModal from "../Winners/WinnerModal";
 const RaffleAnimation = lazy(() => import("./RaffleAnimation"));
 
-const Raffle = ({ onWinnerAdd }) => {
+const Raffle = ({ onWinnerAdd, onStart }) => {
   const history = useHistory();
+  const [participants, setParticipants] = useState([]);
+  const [rewards, setRewards] = useState([]);
   const [shouldMoveAnimation, setShouldMoveAnimation] = useState(false);
   const [shouldShowModal, setShouldShowModal] = useState(false);
-  const [currentWinners, setCurrentWinners] = useState(false);
   const [currentWinner, setCurrentWinner] = useState({});
-  const [winnerIndex, setWinnerIndex] = useState(0);
   const [shouldShowButton, setShouldShowButton] = useState(false);
 
+  const getWinner = () => {
+    const winner = _.sample(
+      participants.filter((participant) => !participant.wasWon)
+    );
+    return {
+      winner,
+      index: winner
+        ? participants.findIndex(
+            (_participant) => _participant.name === winner.name
+          )
+        : undefined,
+    };
+  };
+
+  const getReward = () => {
+    const reward = _.sample(rewards.filter((reward) => !reward.wasWon));
+    console.info(rewards);
+    return {
+      reward,
+      index: reward
+        ? rewards.findIndex((_reward) => _reward.name === reward.name)
+        : undefined,
+    };
+  };
+
+  const addWinner = async (winnerIndex, rewardIndex) => {
+    const _participants = [...participants];
+    const _rewards = [...rewards];
+    _participants[winnerIndex].wasWon = _rewards[rewardIndex].wasWon = true;
+
+    setParticipants(_participants);
+    setRewards(_rewards);
+    setShouldShowModal(false);
+    setShouldMoveAnimation(false);
+    setShouldMoveAnimation(true);
+  };
+
   const handleStop = async () => {
-    if (currentWinners.length > winnerIndex) {
-      setCurrentWinner(currentWinners[winnerIndex]);
-      setShouldShowModal(true);
+    const obtainingReward = getReward();
+    const obtainingWinner = getWinner();
+    if (!obtainingReward.reward || !obtainingWinner.winner) {
+      console.info("@@ FINISH");
       setShouldMoveAnimation(false);
-      setTimeout(() => {
-        setShouldShowModal(false);
-        setWinnerIndex(winnerIndex + 1);
-        setShouldMoveAnimation(true);
-        onWinnerAdd(currentWinners[winnerIndex]);
-      }, 3000);
-    } else {
       setShouldShowButton(true);
-      setShouldMoveAnimation(false);
+      return;
     }
+
+    const winner = new type.Winner({
+      winner: obtainingWinner.winner,
+      reward: obtainingReward.reward,
+    });
+    setCurrentWinner(winner);
+    setShouldShowModal(true);
+
+    setTimeout(() => {
+      addWinner(obtainingWinner.index, obtainingReward.index);
+      onWinnerAdd(winner);
+      setShouldMoveAnimation();
+    }, 3000);
   };
 
   const handleStart = async () => {
-    setCurrentWinners(await RaffleService.getCurrentRaffleWinners());
-    setWinnerIndex(0);
+    onStart();
+    await setData();
     setShouldMoveAnimation(true);
     setShouldShowButton(false);
   };
+
+  const setData = async () => {
+    const _rewards = await RaffleService.getRewards();
+    const _participants = await RaffleService.getParticipants();
+    setRewards(_rewards);
+    setParticipants(_participants);
+  };
+
+  React.useEffect(() => {
+    setData();
+  }, []);
 
   return (
     <Card className="raffle">
@@ -65,11 +122,16 @@ const Raffle = ({ onWinnerAdd }) => {
           moveAnimation={shouldMoveAnimation}
         />
         <div className="raffle__elements-container">
-          {shouldShowButton && (
-            <Button className="raffle__button" inverted onClick={handleStart}>
-              Comenzar Rifa
-            </Button>
-          )}
+          {shouldShowButton &&
+            (participants.length <= 0 ? (
+              <h2 className="raffle__text">
+                Aún no has agregado participantes
+              </h2>
+            ) : (
+              <Button className="raffle__button" inverted onClick={handleStart}>
+                Comenzar Rifa
+              </Button>
+            ))}
         </div>
         <section className="raffle__logo">
           <h2>Grupo Norte ⬆️ </h2>

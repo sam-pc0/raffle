@@ -1,14 +1,11 @@
 // import * as db from "indexeddb-hooked";
 import Localbase from "localbase";
-import { enumCollections, Rewards } from "../type";
 
 const db = new Localbase("raffle");
-// db.config.debug = false;
+db.config.debug = false;
 
 export const IndexedDbService = {
-  start() {
-    this.update(enumCollections.REWARDS, Rewards);
-  },
+  start() {},
 
   read(collection) {
     return db.collection(collection).get();

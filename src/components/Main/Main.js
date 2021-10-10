@@ -1,26 +1,22 @@
-import React, { lazy, useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Route, Switch } from "react-router-dom";
 import { Grid } from "semantic-ui-react";
 
-import { RaffleService } from "../../helpers/services/raffle.service";
-
 import "./Main.scss";
 
-const WinnersList = lazy(() => import("../Winners/WinnersList"));
-const Raffle = lazy(() => import("../Raffle/Raffle"));
-const Participants = lazy(() => import("../Participants/Participants"));
+import WinnersList from "../Winners/WinnersList";
+import Raffle from "../Raffle/Raffle";
+import Participants from "../Participants/Participants";
 
-const App = () => {
+const Main = () => {
   const [winners, setWinners] = useState([]);
 
-  useEffect(() => {
-    RaffleService.getWinners()
-      .then(setWinners)
-      .catch((error) => alert(error));
-  }, []);
+  const handleWinnerAdd = (winner) => {
+    setWinners((_winners) => [..._winners, winner]);
+  };
 
-  const handleWinnerAdd = (winnerElement) => {
-    setWinners((prevItems) => [...prevItems, winnerElement]);
+  const handleStart = async () => {
+    setWinners([]);
   };
 
   return (
@@ -39,7 +35,7 @@ const App = () => {
         <Grid.Column className="app__column" width={10}>
           <Switch>
             <Route exact path="/">
-              <Raffle onWinnerAdd={handleWinnerAdd} />
+              <Raffle onWinnerAdd={handleWinnerAdd} onStart={handleStart} />
             </Route>
             <Route exact path="/participants">
               <Participants />
@@ -51,4 +47,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default Main;

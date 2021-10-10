@@ -1,14 +1,14 @@
-import React from 'react';
-import Rodal from 'rodal';
-import 'rodal/lib/rodal.css';
-import { Header } from 'semantic-ui-react';
+import React from "react";
+import Rodal from "rodal";
+import "rodal/lib/rodal.css";
+import { Header } from "semantic-ui-react";
 
-import './WinnerModal.scss';
+import "./WinnerModal.scss";
 
 const WinnerModal = ({ open, winnerElement }) => {
   return (
     <>
-      {winnerElement.participant && (
+      {winnerElement.winner && (
         <Rodal
           onClose={() => null}
           duration={500}
@@ -22,18 +22,16 @@ const WinnerModal = ({ open, winnerElement }) => {
           <section className="modal">
             <img
               className="modal__image"
-              src={winnerElement.prize.imgPath}
+              src={winnerElement.reward.imgPath}
               alt="winnerElement"
             />
 
-            <Header as="h2">
-              Felicidades {winnerElement.participant.name}
-            </Header>
+            <Header as="h2">Felicidades {winnerElement.winner.name}</Header>
             <p className="modal__subtitle">
-              {winnerElement.participant.id} - {winnerElement.participant.area}
+              {winnerElement.winner.phone} - {winnerElement.winner.area}
             </p>
             <Header className="modal__prize" as="h3">
-              Tu premio es: {winnerElement.prize.name}
+              Tu premio es: {winnerElement.reward.name}
             </Header>
           </section>
         </Rodal>

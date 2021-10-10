@@ -7,12 +7,12 @@ export const RaffleService = {
     return winners.map((winner) => new Winner(winner));
   },
 
-  async updatetWinners(winners) {
+  async updateWinners(winners) {
     return IndexedDbService.update(enumCollections.WINNERS, winners);
   },
 
   async getParticipants() {
-    let participants = await IndexedDbService.read(
+    const participants = await IndexedDbService.read(
       enumCollections.PARTICIPANTS
     );
     return participants.map((participant) => {
@@ -25,11 +25,11 @@ export const RaffleService = {
   },
 
   async getRewards() {
-    let rewards = IndexedDbService.read(enumCollections.REWARDS);
+    const rewards = await IndexedDbService.read(enumCollections.REWARDS);
     return rewards.map((reward) => new Reward(reward.name, reward.wasWon));
   },
 
   async updateRewards(rewards) {
-    return IndexedDbService.update(enumCollections.WINNERS, rewards);
+    return IndexedDbService.update(enumCollections.REWARDS, rewards);
   },
 };

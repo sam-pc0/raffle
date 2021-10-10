@@ -5,10 +5,11 @@ export const enumCollections = {
 };
 
 export class Participant {
-  constructor({ name, area, phone }) {
+  constructor({ name, area, phone, wasWon }) {
     this.name = name;
     this.area = area;
     this.phone = phone;
+    this.wasWon = wasWon;
   }
 }
 
@@ -21,8 +22,8 @@ export class Reward {
 }
 
 export class Winner {
-  constructor({ participant, reward }) {
-    this.participant = participant;
+  constructor({ winner, reward }) {
+    this.winner = winner;
     this.reward = reward;
   }
 }

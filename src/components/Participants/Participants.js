@@ -20,15 +20,17 @@ const Participants = () => {
   }, []);
 
   const handleAdd = (participant) => {
-    setParticipants([...participants, participant]);
-    RaffleService.updateParticipants(participants)
+    const _participants = [...participants, participant];
+    setParticipants(_participants);
+    RaffleService.updateParticipants(_participants)
       .then(setShouldShowModal(false))
       .catch(() => alert("No se pudo obtener participantes"));
   };
 
   const handleRemove = async (index) => {
-    setParticipants(participants.filter((_, i) => index !== i));
-    RaffleService.updateParticipants(participants)
+    const _participants = participants.filter((_, i) => index !== i);
+    setParticipants(_participants);
+    RaffleService.updateParticipants(_participants)
       .then()
       .catch(() => alert("No se pudo obtener participantes"));
   };
