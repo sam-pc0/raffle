@@ -1,5 +1,6 @@
 import React from "react";
 import Rodal from "rodal";
+import PropTypes from "prop-types";
 import "rodal/lib/rodal.css";
 import { Header } from "semantic-ui-react";
 
@@ -39,5 +40,8 @@ const WinnerModal = ({ open, winnerElement }) => {
     </>
   );
 };
-
+WinnerModal.propTypes = {
+  open: PropTypes.bool.isRequired,
+  winnerElement: PropTypes.object,
+};
 export default WinnerModal;

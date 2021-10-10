@@ -1,12 +1,13 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { TweenMax, TimelineMax } from 'gsap';
-import './RaffleAnimation.scss';
+import React, { useRef, useEffect } from "react";
+import { TweenMax, TimelineMax } from "gsap";
+import "./RaffleAnimation.scss";
+import PropTypes from "prop-types";
 
 const RaffleAnimation = ({ moveAnimation, onStop }) => {
   let person = useRef(null);
   let bitcoin = useRef(null);
-  let machineCircles = document.getElementsByClassName('machine-circles');
-  let hexags = document.getElementsByClassName('hexa');
+  let machineCircles = document.getElementsByClassName("machine-circles");
+  let hexags = document.getElementsByClassName("hexa");
   let blueSquares = useRef(null);
   let face = useRef(null);
   let face2 = useRef(null);
@@ -15,7 +16,7 @@ const RaffleAnimation = ({ moveAnimation, onStop }) => {
   let firstCoinLines = useRef(null);
 
   let coins = useRef(null);
-  let sparkleTop = document.getElementsByClassName('sparkle-top');
+  let sparkleTop = document.getElementsByClassName("sparkle-top");
 
   let machineWrapper = useRef(null);
   let characterWrapper = useRef(null);
@@ -25,14 +26,14 @@ const RaffleAnimation = ({ moveAnimation, onStop }) => {
     if (moveAnimation !== undefined) {
       if (moveAnimation) {
         startAnimation();
-      }else{
-        console.log('animation stop')
+      } else {
+        console.log("animation stop");
       }
     }
   }, [moveAnimation]);
 
   const setAnimationDefaultValues = () => {
-    TweenMax.set(person.current, { transformOrigin: 'center bottom' });
+    TweenMax.set(person.current, { transformOrigin: "center bottom" });
     TweenMax.set(face2.current, { autoAlpha: 1 });
     TweenMax.set(bitcoin.current, { autoAlpha: 0 });
     TweenMax.set(firstCoin.current, { y: -150, autoAlpha: 0 });
@@ -40,7 +41,7 @@ const RaffleAnimation = ({ moveAnimation, onStop }) => {
     TweenMax.set([machineWrapper.current, coins.current], { autoAlpha: 1 });
     TweenMax.set(machineCircles, {
       autoAlpha: 0,
-      transformOrigin: 'center center',
+      transformOrigin: "center center",
     });
     TweenMax.set(sparkleTop, { autoAlpha: 0 });
     TweenMax.set(face.current, { autoAlpha: 0 });
@@ -63,12 +64,18 @@ const RaffleAnimation = ({ moveAnimation, onStop }) => {
       .to(firstCoin.current, 0.3, { autoAlpha: 1, y: -40 }) // coin
       .to(firstCoin.current, 0.3, { autoAlpha: 0, y: 150, delay: 0.3 }) // coin
       .to(blueSquares.current, 0.5, { autoAlpha: 1 }) // machine blue squares shows
-      .staggerTo(machineCircles, 0.3, {autoAlpha: 1, rotation: 90}, 0.1) // circles spinning
-      .staggerTo(machineCircles, 0.1, {rotation: 6200}, 0.2)  // circles spinning
-      .staggerTo(hexags, 1, {autoAlpha: 1}, 1, '-=5') /* MACHINE DOING THE THING */
-      .staggerTo(hexags, 1, {autoAlpha: 0}, 1, '-=3')
+      .staggerTo(machineCircles, 0.3, { autoAlpha: 1, rotation: 90 }, 0.1) // circles spinning
+      .staggerTo(machineCircles, 0.1, { rotation: 6200 }, 0.2) // circles spinning
+      .staggerTo(
+        hexags,
+        1,
+        { autoAlpha: 1 },
+        1,
+        "-=5"
+      ) /* MACHINE DOING THE THING */
+      .staggerTo(hexags, 1, { autoAlpha: 0 }, 1, "-=3")
       .to(face2.current, 0.1, { autoAlpha: 0 })
-      .to(face.current, 0.1, { autoAlpha: 1 }, '-=0.2')
+      .to(face.current, 0.1, { autoAlpha: 1 }, "-=0.2")
       .to([machineWrapper.current, coins.current], 0.2, { autoAlpha: 0 }) // machine dissappears
       .to(characterWrapper.current, 0.1, { y: 150 }) //character moved  */
       .to(coins.current, 0.1, { autoAlpha: 1, y: 130 })
@@ -84,7 +91,7 @@ const RaffleAnimation = ({ moveAnimation, onStop }) => {
         viewBox="0 0 1245 1323"
         width="90%"
         height="90%"
-        style={{ marginTop: '-2em' }}
+        style={{ marginTop: "-2em" }}
         // viewBox="0 0 960 540"
       >
         <g id="wrapper">
@@ -980,6 +987,11 @@ const RaffleAnimation = ({ moveAnimation, onStop }) => {
       </svg>
     </div>
   );
+};
+
+RaffleAnimation.propTypes = {
+  moveAnimation: PropTypes.func.isRequired,
+  onStop: PropTypes.func.isRequired,
 };
 
 export default RaffleAnimation;

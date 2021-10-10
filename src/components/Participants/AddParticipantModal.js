@@ -3,6 +3,7 @@ import Rodal from "rodal";
 import "rodal/lib/rodal.css";
 import { Participant } from "../../helpers/type";
 import { Form, Input, Button } from "semantic-ui-react";
+import PropTypes from "prop-types";
 
 import "./Participants.scss";
 
@@ -73,6 +74,12 @@ const AddParticipantModal = ({ open, onClose, onAdd }) => {
       </section>
     </Rodal>
   );
+};
+
+AddParticipantModal.propTypes = {
+  open: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
 };
 
 export default AddParticipantModal;

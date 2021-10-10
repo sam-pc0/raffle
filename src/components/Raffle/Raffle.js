@@ -1,4 +1,5 @@
 import React, { lazy, useState } from "react";
+import PropTypes from "prop-types";
 import { Card, Divider, Button } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
 
@@ -140,5 +141,11 @@ const Raffle = ({ onWinnerAdd, onStart }) => {
     </Card>
   );
 };
+
+Raffle.propTypes = {
+  onWinnerAdd: PropTypes.func.isRequired,
+  onStart: PropTypes.func.isRequired,
+};
+
 
 export default Raffle;

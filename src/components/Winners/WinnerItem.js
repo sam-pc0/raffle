@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Card, Grid, Header } from "semantic-ui-react";
+import PropTypes from "prop-types";
+import { Header } from "semantic-ui-react";
 
 const WinnerItem = ({ data }) => {
   const [winnerElement, setWinnerElement] = useState(data);
@@ -57,6 +58,10 @@ const WinnerItem = ({ data }) => {
       </div>
     </div>
   );
+};
+
+WinnerItem.propTypes = {
+  data: PropTypes.object.isRequired,
 };
 
 export default WinnerItem;

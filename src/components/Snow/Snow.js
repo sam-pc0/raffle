@@ -136,7 +136,6 @@ const Snow = () => {
     init();
 
     return () => window.removeEventListener('resize', setCanvasDimensions);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

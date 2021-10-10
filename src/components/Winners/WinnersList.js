@@ -1,4 +1,5 @@
-import React, { lazy } from "react";
+import React from "react";
+import PropTypes from "prop-types";
 import Anime, { anime } from "react-anime";
 import { Card, Divider } from "semantic-ui-react";
 
@@ -6,7 +7,6 @@ import "./WinnersList.scss";
 import WinnerItem from "./WinnerItem";
 
 const WinnersList = ({ data }) => {
-
   return (
     <Card
       className="list"
@@ -53,6 +53,10 @@ const WinnersList = ({ data }) => {
       </Card.Content>
     </Card>
   );
+};
+
+WinnersList.propTypes = {
+  data: PropTypes.array.isRequired,
 };
 
 export default WinnersList;
