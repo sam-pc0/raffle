@@ -1,25 +1,18 @@
-import React, { Suspense, lazy } from 'react';
-import ReactDOM from 'react-dom';
+import React from "react";
+import ReactDOM from "react-dom";
 
 import IndexedDbService from "./helpers/services/indexed-db";
 
-import { Loader } from 'semantic-ui-react';
-import 'semantic-ui-css/semantic.min.css';
-import './index.scss';
+import "semantic-ui-css/semantic.min.css";
+import "./index.scss";
 
-const App = lazy(() => import('./views/App'));
-const Snow = lazy(() => import('./components/Snow/Snow'));
+import App from "./views/App";
+import Snow from "./components/Snow/Snow";
 
 IndexedDbService.start();
 
 ReactDOM.render(
-  <Suspense
-    fallback={
-      <Loader inverted active>
-        Loading...
-      </Loader>
-    }
-  >
+  <>
     <img
       className="background-image"
       src="/images/background.jpg"
@@ -38,6 +31,6 @@ ReactDOM.render(
 
     <Snow />
     <App />
-  </Suspense>,
-  document.getElementById('root')
+  </>,
+  document.getElementById("root")
 );

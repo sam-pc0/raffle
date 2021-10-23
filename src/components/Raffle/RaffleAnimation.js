@@ -990,7 +990,7 @@ const RaffleAnimation = ({ moveAnimation, onStop }) => {
 };
 
 RaffleAnimation.propTypes = {
-  moveAnimation: PropTypes.func.isRequired,
+  moveAnimation: PropTypes.bool.isRequired,
   onStop: PropTypes.func.isRequired,
 };
 

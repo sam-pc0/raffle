@@ -1,4 +1,4 @@
-import React, { lazy, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import { Card, Divider, Button } from "semantic-ui-react";
 import { useHistory } from "react-router-dom";
@@ -9,7 +9,7 @@ import _ from "lodash";
 
 import "./Raffle.scss";
 import WinnerModal from "../Winners/WinnerModal";
-const RaffleAnimation = lazy(() => import("./RaffleAnimation"));
+import RaffleAnimation from "./RaffleAnimation";
 
 const Raffle = ({ onWinnerAdd, onStart }) => {
   const history = useHistory();
@@ -24,6 +24,7 @@ const Raffle = ({ onWinnerAdd, onStart }) => {
     const winner = _.sample(
       participants.filter((participant) => !participant.wasWon)
     );
+
     return {
       winner,
       index: winner
@@ -36,7 +37,6 @@ const Raffle = ({ onWinnerAdd, onStart }) => {
 
   const getReward = () => {
     const reward = _.sample(rewards.filter((reward) => !reward.wasWon));
-    console.info(rewards);
     return {
       reward,
       index: reward
@@ -61,8 +61,7 @@ const Raffle = ({ onWinnerAdd, onStart }) => {
     const obtainingReward = getReward();
     const obtainingWinner = getWinner();
     if (!obtainingReward.reward || !obtainingWinner.winner) {
-      console.info("@@ FINISH");
-      setShouldMoveAnimation(false);
+      RaffleService.updateRewards(type.Rewards);
       setShouldShowButton(true);
       return;
     }
@@ -146,6 +145,5 @@ Raffle.propTypes = {
   onWinnerAdd: PropTypes.func.isRequired,
   onStart: PropTypes.func.isRequired,
 };
-
 
 export default Raffle;

@@ -1,7 +1,7 @@
-import React, { lazy } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-const Main = lazy(() => import("../components/Main/Main"));
+import Main from "../components/Main/Main";
 
 const App = () => {
   return (

@@ -77,7 +77,7 @@ const AddParticipantModal = ({ open, onClose, onAdd }) => {
 };
 
 AddParticipantModal.propTypes = {
-  open: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   onAdd: PropTypes.func.isRequired,
 };
